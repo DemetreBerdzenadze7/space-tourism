@@ -1,9 +1,9 @@
-import launchVehicleLandscape from "../public/technology/image-launch-vehicle-landscape.webp";
-import launchVehiclePortrait from "../public/technology/image-launch-vehicle-portrait.webp";
-import spaceCapsuleLandscape from "../public/technology/image-space-capsule-landscape.webp";
-import spaceCapsulePortrait from "../public/technology/image-space-capsule-portrait.webp";
-import spaceportLandscape from "../public/technology/image-spaceport-landscape.webp";
-import spaceportPortrait from "../public/technology/image-spaceport-portrait.webp";
+import launchVehicleLandscape from "../public/technology/image-launch-vehicle-landscape.jpg";
+import launchVehiclePortrait from "../public/technology/image-launch-vehicle-portrait.jpg";
+import spaceCapsuleLandscape from "../public/technology/image-space-capsule-landscape.jpg";
+import spaceCapsulePortrait from "../public/technology/image-space-capsule-portrait.jpg";
+import spaceportLandscape from "../public/technology/image-spaceport-landscape.jpg";
+import spaceportPortrait from "../public/technology/image-spaceport-portrait.jpg";
 import { Technology } from "../types/types";
 
 export const technology: Technology[] = [

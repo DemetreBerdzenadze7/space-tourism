@@ -53,7 +53,7 @@ const Header = () => {
         <NavLinks variant="mobile" onNavigate={closeMenu} />
       </nav>
 
-      <nav className="hidden h-full shrink-0 bg-white/5 pr-10 pl-30 backdrop-blur-2xl md:block lg:w-176 lg:pr-16 lg:pl-0">
+      <nav className="hidden h-full shrink-0 bg-white/5 pr-10 backdrop-blur-2xl md:block md:w-160 lg:w-176 lg:pr-16">
         <NavLinks variant="tablet" />
       </nav>
     </header>

@@ -1,16 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { startTransition, useState, ViewTransition } from "react";
+import { ViewTransition } from "react";
 import { crew } from "@/data/crew";
+import { useSelectNext } from "@/hooks/selectHooks";
 
 const CrewSlider = () => {
-  const [nextCrew, setNextCrew] = useState<string>("Douglas Hurley");
-  const currentCrew = crew.find((item) => item.name === nextCrew) ?? crew[0];
-
-  const selectCrew = (name: string) => {
-    startTransition(() => setNextCrew(name));
-  };
+  const { selectNext, handleSelect } = useSelectNext("Douglas Hurley");
+  const currentCrew = crew.find((item) => item.name === selectNext) ?? crew[0];
 
   return (
     <div className="mx-auto flex w-full max-w-lg flex-1 flex-col items-center text-center lg:grid lg:max-w-container lg:grid-cols-2 lg:grid-rows-[1fr_auto] lg:items-start lg:text-left">
@@ -46,7 +43,7 @@ const CrewSlider = () => {
                 className={`relative size-dot rounded-full bg-white/17 transition-colors lg:size-dot-lg ${
                   active ? "" : "hover:bg-white/50"
                 }`}
-                onClick={() => selectCrew(item.name)}
+                onClick={() => handleSelect(item.name)}
               >
                 {active && (
                   <ViewTransition

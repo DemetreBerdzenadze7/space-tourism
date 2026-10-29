@@ -53,7 +53,7 @@ const NavList = ({
   }
 
   return (
-    <ul className="flex h-full gap-12 lg:justify-end">
+    <ul className="flex h-full justify-end gap-12">
       {links.map((link) => {
         const active =
           pathname !== null && section(pathname) === section(link.href);
@@ -68,11 +68,7 @@ const NavList = ({
               }`}
               onClick={onNavigate}
             >
-              <span
-                className={`mr-3 font-bold ${link.number === "00" ? "hidden lg:inline" : ""}`}
-              >
-                {link.number}
-              </span>
+              <span className="mr-3 font-bold">{link.number}</span>
               {link.label}
               {active && (
                 <ViewTransition

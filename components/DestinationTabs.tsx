@@ -1,19 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { startTransition, useState, ViewTransition } from "react";
+import { ViewTransition } from "react";
 import { destinations } from "@/data/destination";
+import { useSelectNext } from "@/hooks/selectHooks";
 
 const DestinationTabs = () => {
-  const [nextDestination, setNextDestination] = useState<string>("Moon");
+  const { selectNext, handleSelect } = useSelectNext("Moon");
   const destination =
-    destinations.find((item) => item.name === nextDestination) ??
-    destinations[0];
+    destinations.find((item) => item.name === selectNext) ?? destinations[0];
 
   // startTransition lets <ViewTransition> animate the switch
-  const selectDestination = (name: string) => {
-    startTransition(() => setNextDestination(name));
-  };
 
   return (
     <div className="mx-auto flex max-w-lg flex-col items-center text-center">
@@ -44,7 +41,7 @@ const DestinationTabs = () => {
                     ? "text-white"
                     : "nav-hover-line text-light hover:text-white"
                 }`}
-                onClick={() => selectDestination(item.name)}
+                onClick={() => handleSelect(item.name)}
               >
                 {item.name}
                 {active && (

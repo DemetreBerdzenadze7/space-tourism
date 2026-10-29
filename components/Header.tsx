@@ -12,7 +12,7 @@ const Header = () => {
     setToggleMenu(false);
   };
   return (
-    <header className="absolute inset-x-0 top-0 z-10 flex items-center justify-between p-6 [view-transition-name:site-header] md:h-header md:p-0 md:pl-10">
+    <header className="absolute inset-x-0 top-0 z-10 flex items-center justify-between p-6 [view-transition-name:site-header] md:h-header md:p-0 md:pl-10 lg:top-10 lg:pl-16">
       <Link
         href="/home"
         transitionTypes={["nav-page"]}
@@ -27,6 +27,8 @@ const Header = () => {
           className="size-10 md:size-12"
         />
       </Link>
+
+      <span className="ml-16 hidden h-px flex-1 bg-white/25 lg:block" />
 
       <button
         type="button"
@@ -51,7 +53,7 @@ const Header = () => {
         <NavLinks variant="mobile" onNavigate={closeMenu} />
       </nav>
 
-      <nav className="hidden h-full bg-white/5 pr-10 pl-30 backdrop-blur-2xl md:block">
+      <nav className="hidden h-full shrink-0 bg-white/5 pr-10 pl-30 backdrop-blur-2xl md:block lg:w-176 lg:pr-16 lg:pl-0">
         <NavLinks variant="tablet" />
       </nav>
     </header>

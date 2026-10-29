@@ -22,7 +22,7 @@ const Home = () => {
         </p>
 
         <Link
-          href="/destination/moon"
+          href="/destination"
           transitionTypes={["nav-page"]}
           className="mt-28 flex size-explore-sm animate-pulse-ring items-center justify-center rounded-full bg-white font-heading text-button-sm tracking-button text-dark uppercase transition-[box-shadow,scale] duration-500 hover:animate-none hover:shadow-explore-sm focus-visible:animate-none focus-visible:shadow-explore-sm focus-visible:outline-none active:scale-95 motion-reduce:animate-none md:mt-16 md:size-explore md:text-button md:hover:shadow-explore md:focus-visible:shadow-explore"
         >

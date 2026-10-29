@@ -1,5 +1,5 @@
 import douglasHurley from "../public/crew/image-douglas-hurley.webp";
-import gregoryOlsen from "../public/crew/image-gregory-olsen.webp";
+import anoushehAnsari from "../public/crew/image-anousheh-ansari.webp";
 import markShuttleworth from "../public/crew/image-mark-shuttleworth.webp";
 import victorGlover from "../public/crew/image-victor-glover.webp";
 
@@ -25,9 +25,9 @@ export const crew: CrewMember[] = [
     portrait: victorGlover,
   },
   {
-    name: "Gregory Olsen",
+    name: "Anousheh Ansari",
     role: "Flight Engineer",
-    bio: "Gregory Olsen is an American engineer and co-founder of Sensors Unlimited. Olsen was the third self-funded space tourist, flying to the ISS aboard Soyuz TMA-7 in 2005 and spending nearly ten days in orbit.",
-    portrait: gregoryOlsen,
+    bio: "Anousheh Ansari is an Iranian American engineer and co-founder of Prodea Systems. Ansari was the fourth self-funded space tourist, the first self-funded woman to fly to the ISS, and the first Iranian in space.",
+    portrait: anoushehAnsari,
   },
 ];

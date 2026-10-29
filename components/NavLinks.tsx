@@ -3,15 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, ViewTransition } from "react";
-import { destinations } from "../data/destination";
 
 const links = [
   { number: "00", label: "Home", href: "/home" },
-  {
-    number: "01",
-    label: "Destination",
-    href: `/destination/${destinations[0].name.toLowerCase()}`,
-  },
+  { number: "01", label: "Destination", href: "/destination" },
   { number: "02", label: "Crew", href: "/crew" },
   { number: "03", label: "Technology", href: "/technology" },
 ];
@@ -58,7 +53,7 @@ const NavList = ({
   }
 
   return (
-    <ul className="flex h-full gap-12">
+    <ul className="flex h-full gap-12 lg:justify-end">
       {links.map((link) => {
         const active =
           pathname !== null && section(pathname) === section(link.href);
@@ -68,14 +63,16 @@ const NavList = ({
             <Link
               href={link.href}
               transitionTypes={["nav-page"]}
-              className={`relative flex h-full items-center font-nav text-nav tracking-nav text-white uppercase ${
+              className={`relative flex h-full items-center font-nav text-nav tracking-nav text-white uppercase lg:tracking-nav-lg ${
                 active ? "" : "nav-hover-line"
               }`}
               onClick={onNavigate}
             >
-              {link.number !== "00" && (
-                <span className="mr-3 font-bold">{link.number}</span>
-              )}
+              <span
+                className={`mr-3 font-bold ${link.number === "00" ? "hidden lg:inline" : ""}`}
+              >
+                {link.number}
+              </span>
               {link.label}
               {active && (
                 <ViewTransition

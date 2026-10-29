@@ -1,54 +1,19 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { Suspense, ViewTransition } from "react";
-import type { Metadata } from "next";
-import PageTransition from "@/components/PageTransition";
+import { startTransition, useState, ViewTransition } from "react";
 import { destinations } from "@/data/destination";
 
-const findDestination = (name: string) =>
-  destinations.find((item) => item.name.toLowerCase() === name);
+const DestinationTabs = () => {
+  const [nextDestination, setNextDestination] = useState<string>("Moon");
+  const destination =
+    destinations.find((item) => item.name === nextDestination) ??
+    destinations[0];
 
-export function generateStaticParams() {
-  return destinations.map((item) => ({ name: item.name.toLowerCase() }));
-}
-
-export async function generateMetadata({
-  params,
-}: PageProps<"/destination/[name]">): Promise<Metadata> {
-  const { name } = await params;
-  const destination = findDestination(name);
-  if (!destination) return {};
-
-  return {
-    title: `Destination - ${destination.name}`,
-    description: destination.description,
+  // startTransition lets <ViewTransition> animate the switch
+  const selectDestination = (name: string) => {
+    startTransition(() => setNextDestination(name));
   };
-}
-
-const Destination = ({ params }: PageProps<"/destination/[name]">) => {
-  return (
-    <PageTransition>
-      <main className="min-h-svh bg-[url('/destination/background-destination-mobile.jpg')] bg-cover bg-center px-6 pt-28 pb-12 md:bg-[url('/destination/background-destination-tablet.jpg')] md:px-10 md:pt-34">
-        <h1 className="text-center font-nav text-subheading-sm tracking-subheading text-white uppercase md:text-left md:text-subheading-md">
-          <span className="mr-6 font-bold text-white/25">01</span>
-          Pick your destination
-        </h1>
-
-        <Suspense fallback={null}>
-          <DestinationContent params={params} />
-        </Suspense>
-      </main>
-    </PageTransition>
-  );
-};
-
-const DestinationContent = async ({
-  params,
-}: Pick<PageProps<"/destination/[name]">, "params">) => {
-  const { name } = await params;
-  const destination = findDestination(name);
-  if (!destination) notFound();
 
   return (
     <div className="mx-auto flex max-w-lg flex-col items-center text-center">
@@ -72,13 +37,14 @@ const DestinationContent = async ({
 
           return (
             <li key={item.name}>
-              <Link
-                href={`/destination/${item.name.toLowerCase()}`}
+              <button
+                type="button"
                 className={`relative block pb-3 font-nav text-tab-sm tracking-subheading uppercase transition-colors md:text-tab ${
                   active
                     ? "text-white"
                     : "nav-hover-line text-light hover:text-white"
                 }`}
+                onClick={() => selectDestination(item.name)}
               >
                 {item.name}
                 {active && (
@@ -90,7 +56,7 @@ const DestinationContent = async ({
                     <span className="absolute inset-x-0 bottom-0 h-0.75 bg-white" />
                   </ViewTransition>
                 )}
-              </Link>
+              </button>
             </li>
           );
         })}
@@ -135,4 +101,4 @@ const DestinationContent = async ({
   );
 };
 
-export default Destination;
+export default DestinationTabs;

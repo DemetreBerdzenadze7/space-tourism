@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 @theme inline {
   /* Fonts (variables come from next/font in app/layout.tsx) */
   --font-heading: var(--font-bellefair);
@@ -10,7 +17,7 @@
 @theme {
   /* Breakpoints */
   --breakpoint-md: 48rem; /* 768px - tablet */
-  --breakpoint-lg: 90rem; /* 1440px - desktop */
+  --breakpoint-lg: 64rem; /* 1024px - desktop */
 
   /* Colors */
   --color-dark: #0b0d17;
@@ -36,6 +43,16 @@
   --text-stat--line-height: 1.2;
   --text-label: 0.875rem; /* 14px */
 
+  --text-role-sm: 1.125rem; /* 18px */
+  --text-role: 1.5rem; /* 24px */
+  --text-role-lg: 2rem; /* 32px */
+  --text-name-sm: 1.5rem; /* 24px */
+  --text-name-sm--line-height: 1.15;
+  --text-name: 2.5rem; /* 40px */
+  --text-name--line-height: 1.15;
+  --text-name-lg: 3.5rem; /* 56px */
+  --text-name-lg--line-height: 1.15;
+
   --text-tab-sm: 0.875rem; /* 14px */
   --text-tab: 1rem; /* 16px */
 
@@ -43,6 +60,8 @@
   --text-body-sm--line-height: 1.8;
   --text-body: 1rem; /* 16px */
   --text-body--line-height: 1.8;
+  --text-body-lg: 1.125rem; /* 18px */
+  --text-body-lg--line-height: 1.8;
 
   --text-nav: 1rem; /* 16px */
 
@@ -52,6 +71,7 @@
   /* Letter spacing */
   --tracking-subheading: 0.15em;
   --tracking-nav: 0.125em;
+  --tracking-nav-lg: 0.15em;
   --tracking-button: 0.0625em;
 
   /* Sizes */
@@ -60,6 +80,12 @@
   --spacing-explore: 17rem; /* 272px */
   --spacing-planet-sm: 9.375rem; /* 150px */
   --spacing-planet: 18.75rem; /* 300px */
+  --spacing-portrait-sm: 21.25rem; /* 340px */
+  --spacing-portrait: 35rem; /* 560px */
+  --spacing-portrait-lg: 42.25rem; /* 676px */
+  --spacing-dot: 0.625rem; /* 10px */
+  --spacing-dot-lg: 0.9375rem; /* 15px */
+  --spacing-container: 69.375rem; /* 1110px - desktop content width */
 
   /* Explore button */
   --shadow-explore-sm: 0 0 0 3rem rgb(255 255 255 / 0.1);
@@ -128,6 +154,15 @@
     planet-in;
 }
 
+/* Crew portrait rises in from below */
+::view-transition-old(.portrait) {
+  animation: var(--duration-exit) ease-in both portrait-out;
+}
+::view-transition-new(.portrait) {
+  animation: var(--duration-move) var(--ease-space) var(--duration-exit) both
+    portrait-in;
+}
+
 /* Text slides up and fades */
 ::view-transition-old(.text) {
   animation: var(--duration-exit) ease-in both text-out;
@@ -159,6 +194,20 @@
   from {
     opacity: 0;
     transform: scale(0.6) rotate(25deg);
+  }
+}
+
+@keyframes portrait-out {
+  to {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes portrait-in {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
   }
 }
 

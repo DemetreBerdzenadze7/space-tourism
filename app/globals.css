@@ -23,8 +23,21 @@
   --text-display: 9rem; /* 144px */
   --text-display--line-height: 1.2;
 
+  --text-heading-sm: 3.5rem; /* 56px */
+  --text-heading-sm--line-height: 1.15;
+  --text-heading: 5rem; /* 80px */
+  --text-heading--line-height: 1.15;
+
   --text-subheading-sm: 1rem; /* 16px */
+  --text-subheading-md: 1.25rem; /* 20px */
   --text-subheading: 1.75rem; /* 28px */
+
+  --text-stat: 1.75rem; /* 28px */
+  --text-stat--line-height: 1.2;
+  --text-label: 0.875rem; /* 14px */
+
+  --text-tab-sm: 0.875rem; /* 14px */
+  --text-tab: 1rem; /* 16px */
 
   --text-body-sm: 0.9375rem; /* 15px */
   --text-body-sm--line-height: 1.8;
@@ -45,6 +58,8 @@
   --spacing-header: 6rem; /* 96px - tablet header height */
   --spacing-explore-sm: 9rem; /* 144px */
   --spacing-explore: 17rem; /* 272px */
+  --spacing-planet-sm: 9.375rem; /* 150px */
+  --spacing-planet: 18.75rem; /* 300px */
 
   /* Explore button */
   --shadow-explore-sm: 0 0 0 3rem rgb(255 255 255 / 0.1);
@@ -58,5 +73,133 @@
     100% {
       box-shadow: 0 0 0 2.5rem rgb(255 255 255 / 0);
     }
+  }
+}
+
+/* ---------- View transitions ---------- */
+:root {
+  --duration-exit: 200ms;
+  --duration-enter: 400ms;
+  --duration-move: 500ms;
+  --ease-space: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Let clicks pass through while an animation runs */
+::view-transition {
+  pointer-events: none;
+}
+
+/* Header stays still while pages change */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* Page to page (header links) */
+::view-transition-old(.page-out) {
+  animation: var(--duration-exit) ease-in both fade-blur reverse;
+}
+::view-transition-new(.page-in) {
+  animation: var(--duration-enter) ease-out var(--duration-exit) both fade-blur;
+}
+
+/* Active underline slides to the new link / tab */
+::view-transition-group(.indicator) {
+  animation-duration: var(--duration-move);
+  animation-timing-function: var(--ease-space);
+  z-index: 101;
+}
+
+/* Planet spins out, the next one spins in */
+::view-transition-group(.planet) {
+  animation-duration: var(--duration-move);
+}
+::view-transition-old(.planet) {
+  animation: var(--duration-exit) ease-in both planet-out;
+}
+::view-transition-new(.planet) {
+  animation: var(--duration-move) var(--ease-space) var(--duration-exit) both
+    planet-in;
+}
+
+/* Text slides up and fades */
+::view-transition-old(.text) {
+  animation: var(--duration-exit) ease-in both text-out;
+}
+::view-transition-new(.text) {
+  animation: var(--duration-enter) var(--ease-space) var(--duration-exit) both
+    text-in;
+}
+
+@keyframes fade-blur {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes planet-out {
+  to {
+    opacity: 0;
+    transform: scale(0.6) rotate(-25deg);
+  }
+}
+
+@keyframes planet-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(25deg);
+  }
+}
+
+@keyframes text-out {
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes text-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* Hover underline for inactive nav links and tabs */
+@utility nav-hover-line {
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 3px;
+    background-color: rgb(255 255 255 / 0.5);
+    transform: scaleX(0);
+    transition: transform 300ms var(--ease-space);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
   }
 }

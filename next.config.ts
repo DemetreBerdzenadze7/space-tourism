@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         destination: "/home",
         permanent: false,
       },
+      {
+        source: "/destination",
+        destination: "/destination/moon",
+        permanent: false,
+      },
     ];
   },
   turbopack: {

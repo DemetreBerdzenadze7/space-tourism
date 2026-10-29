@@ -3,19 +3,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
-const links = [
-  { number: "00", label: "Home", href: "/home", active: true },
-  { number: "01", label: "Destination", href: "/destination", active: false },
-  { number: "02", label: "Crew", href: "/crew", active: false },
-  { number: "03", label: "Technology", href: "/technology", active: false },
-];
+import NavLinks from "./NavLinks";
 
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
+
+  const closeMenu = () => {
+    setToggleMenu(false);
+  };
   return (
-    <header className="absolute inset-x-0 top-0 z-10 flex items-center justify-between p-6 md:h-header md:p-0 md:pl-10">
-      <Link href="/home" className="shrink-0">
+    <header className="absolute inset-x-0 top-0 z-10 flex items-center justify-between p-6 [view-transition-name:site-header] md:h-header md:p-0 md:pl-10">
+      <Link
+        href="/home"
+        transitionTypes={["nav-page"]}
+        className="shrink-0"
+        onClick={closeMenu}
+      >
         <Image
           src="/shared/logo.svg"
           alt="Space tourism logo"
@@ -40,50 +43,16 @@ const Header = () => {
         }`}
       >
         <div className="flex h-22 items-center justify-end px-6">
-          <button
-            type="button"
-            aria-label="Close menu"
-            onClick={() => setToggleMenu(false)}
-          >
+          <button type="button" aria-label="Close menu" onClick={closeMenu}>
             <Image src="/shared/icon-close.svg" alt="" width={20} height={21} />
           </button>
         </div>
 
-        <ul className="mt-11 flex flex-col gap-7 pl-8">
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={`block border-r-4 font-nav text-nav leading-normal tracking-nav text-white uppercase ${
-                  link.active ? "border-white" : "border-transparent"
-                }`}
-              >
-                <span className="mr-3 font-bold">{link.number}</span>
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <NavLinks variant="mobile" onNavigate={closeMenu} />
       </nav>
 
       <nav className="hidden h-full bg-white/5 pr-10 pl-30 backdrop-blur-2xl md:block">
-        <ul className="flex h-full gap-12">
-          {links.map((link) => (
-            <li key={link.href} className="h-full">
-              <Link
-                href={link.href}
-                className={`flex h-full items-center border-b-[3px] font-nav text-nav tracking-nav text-white uppercase ${
-                  link.active ? "border-white" : "border-transparent"
-                }`}
-              >
-                {link.number !== "00" && (
-                  <span className="mr-3 font-bold">{link.number}</span>
-                )}
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <NavLinks variant="tablet" />
       </nav>
     </header>
   );

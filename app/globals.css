@@ -1,1 +1,62 @@
 @import "tailwindcss";
+
+@theme inline {
+  /* Fonts (variables come from next/font in app/layout.tsx) */
+  --font-heading: var(--font-bellefair);
+  --font-nav: var(--font-barlow-condensed);
+  --font-body: var(--font-barlow);
+}
+
+@theme {
+  /* Breakpoints */
+  --breakpoint-md: 48rem; /* 768px - tablet */
+  --breakpoint-lg: 90rem; /* 1440px - desktop */
+
+  /* Colors */
+  --color-dark: #0b0d17;
+  --color-light: #d0d6f9;
+  --color-white: #ffffff;
+
+  /* Font sizes */
+  --text-display-sm: 5rem; /* 80px */
+  --text-display-sm--line-height: 1.2;
+  --text-display: 9rem; /* 144px */
+  --text-display--line-height: 1.2;
+
+  --text-subheading-sm: 1rem; /* 16px */
+  --text-subheading: 1.75rem; /* 28px */
+
+  --text-body-sm: 0.9375rem; /* 15px */
+  --text-body-sm--line-height: 1.8;
+  --text-body: 1rem; /* 16px */
+  --text-body--line-height: 1.8;
+
+  --text-nav: 1rem; /* 16px */
+
+  --text-button-sm: 1.25rem; /* 20px */
+  --text-button: 2rem; /* 32px */
+
+  /* Letter spacing */
+  --tracking-subheading: 0.15em;
+  --tracking-nav: 0.125em;
+  --tracking-button: 0.0625em;
+
+  /* Sizes */
+  --spacing-header: 6rem; /* 96px - tablet header height */
+  --spacing-explore-sm: 9rem; /* 144px */
+  --spacing-explore: 17rem; /* 272px */
+
+  /* Explore button */
+  --shadow-explore-sm: 0 0 0 3rem rgb(255 255 255 / 0.1);
+  --shadow-explore: 0 0 0 5.5rem rgb(255 255 255 / 0.1);
+  --animate-pulse-ring: pulse-ring 2.5s ease-out infinite;
+
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 rgb(255 255 255 / 0.3);
+    }
+    100% {
+      box-shadow: 0 0 0 2.5rem rgb(255 255 255 / 0);
+    }
+  }
+}

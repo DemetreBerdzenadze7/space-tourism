@@ -112,8 +112,7 @@ Each switchable element (planet, portrait, text, indicator) gets a `key` and a s
 
 **Demetre Berdzenadze**
 
-- Frontend Mentor: _add profile link_
-- GitHub: _add profile link_
+- GitHub: https://github.com/DemetreBerdzenadze7
 
 ## Acknowledgments
 
